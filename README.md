@@ -137,19 +137,19 @@ Start here: [https://serp.ly/manyvids-downloader](https://serp.ly/manyvids-downl
 
 ## FAQ
 
-**Can I download ManyVids videos as MP4**  
+**Can I download ManyVids videos as MP4?**  
 Yes. Supported video pages can be exported as MP4 files.
 
-**Do I need to press play first**  
+**Do I need to press play first?**  
 Yes. Many video sources are only exposed after playback begins.
 
-**What file format do downloads use**  
+**What file format do downloads use?**  
 Videos are saved as MP4 files.
 
-**Do I need extra software**  
+**Do I need extra software?**  
 No. Everything runs through the browser extension.
 
-**Can creators use it to archive their own content**  
+**Can creators use it to archive their own content?**  
 Yes, as long as the content is accessible in the active browser session.
 
 ## Notes
