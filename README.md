@@ -1,315 +1,163 @@
-# ManyVids Downloader Browser Extension (Chrome, Firefox, Edge, Opera, Brave)
+# ManyVids Downloader (Browser Extension)
 
+> Download ManyVids videos as MP4 files from supported video pages in your browser.
 
-## Related
+ManyVids Downloader is a browser extension built for users who want a simpler way to save ManyVids videos without relying on external download sites or desktop software. It detects supported ManyVids video sources in the browser, lets you choose from available qualities, and exports the final file as MP4 for easier playback later.
 
----
-<details>
-<summary>
-  Research
-</summary>
-# How to Download ManyVids Videos: Technical Analysis of Stream Patterns, CDNs, and Download Methods
-*A comprehensive research document analyzing ManyVids's video infrastructure, embed patterns, stream formats, and optimal download strategies using modern tools*
-**Authors**: SERP Apps  
-**Date**: December 2025  
-**Version**: 1.0
----
-- [ManyVids Downloader gist](https://gist.github.com/devinschumacher/5334863566ca999c8a423de0c82cb65e)
-## Abstract
+- Save ManyVids videos as MP4 files
+- Detect supported ManyVids video sources from the page
+- Choose from the quality levels exposed by the source
+- Use in-page controls, popup controls, or right-click actions
+- Keep local copies of videos you already have access to
 
-This research document covers ManyVids' store pages, tokenized media responses, and CDN delivery patterns for MP4 and HLS assets.
+## Links
+
+- 🚀 Get it here: [ManyVids Downloader](https://serp.ly/manyvids-downloader)
+- 🆕 Latest release: [GitHub Releases](https://github.com/serpapps/manyvids-downloader/releases/latest)
+- ❓ Help center: [SERP Help](https://help.serp.co/en/)
+- 🐛 Report bugs: [GitHub Issues](https://github.com/serpapps/manyvids-downloader/issues)
+- 💡 Request features: [Feature Requests](https://github.com/serpapps/manyvids-downloader/issues)
+
+## Preview
+
+![ManyVids Downloader workflow preview](assets/workflow-preview.svg)
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [ManyVids Video Infrastructure Overview](#2-manyvids-video-infrastructure-overview)
-3. [URL Patterns and Detection](#3-url-patterns-and-detection)
-4. [Stream Formats and CDN Analysis](#4-stream-formats-and-cdn-analysis)
-5. [yt-dlp Implementation Strategies](#5-yt-dlp-implementation-strategies)
-6. [FFmpeg Processing Techniques](#6-ffmpeg-processing-techniques)
-7. [Alternative Tools and Backup Methods](#7-alternative-tools-and-backup-methods)
-8. [ManyVids API Integration](#8-manyvids-api-integration)
-9. [Implementation Recommendations](#9-implementation-recommendations)
-10. [Troubleshooting and Edge Cases](#10-troubleshooting-and-edge-cases)
-11. [Conclusion](#11-conclusion)
+- [Why ManyVids Downloader](#why-manyvids-downloader)
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Step-by-Step Tutorial: How to Download Videos from ManyVids](#step-by-step-tutorial-how-to-download-videos-from-manyvids)
+- [Supported Formats](#supported-formats)
+- [Who It's For](#who-its-for)
+- [Common Use Cases](#common-use-cases)
+- [Troubleshooting](#troubleshooting)
+- [Trial & Access](#trial--access)
+- [Installation Instructions](#installation-instructions)
+- [FAQ](#faq)
+- [Notes](#notes)
+- [About ManyVids](#about-manyvids)
 
----
+## Why ManyVids Downloader
 
-## 1. Introduction
+ManyVids pages are built for streaming playback, not for straightforward local saving. Videos may be exposed through different player paths or streaming setups, which makes generic downloader tools inconsistent and frustrating for users who just want a direct browser workflow.
 
-ManyVids serves videos through authenticated endpoints and returns media URLs via JSON responses. Downloads typically require a logged-in session and valid cookies.
+ManyVids Downloader is built specifically for that use case. It focuses on supported ManyVids video pages, detects the available media in your browser session, and gives you a direct way to export accessible content as MP4.
 
-### 1.1 Research Scope
+## Features
 
-- ManyVids video pages and store endpoints
-- Authenticated JSON metadata responses
-- MP4 and HLS streams from CDN
+- Video detection for supported ManyVids video pages
+- Multi-source handling for common ManyVids player delivery paths
+- Quality selection for available stream resolutions
+- MP4 export for easier offline playback
+- In-page controls on supported video pages
+- Popup workflow for reviewing detected video options
+- Right-click access for a faster download flow
+- Progress tracking during active downloads
+- Cross-browser support for Chrome, Edge, Brave, Opera, Firefox, Whale, and Yandex
 
-### 1.2 Methodology
+## How It Works
 
-- Inspect XHR calls to store endpoints
-- Capture media URLs from JSON responses
-- Validate URLs with yt-dlp and ffprobe
+1. Install the extension from the latest release.
+2. Open a supported ManyVids video page.
+3. Start playback so the extension can detect the video source.
+4. Open the popup or use the on-page control.
+5. Choose the quality you want.
+6. Download the video and save the final MP4 file locally.
 
----
+## Step-by-Step Tutorial: How to Download Videos from ManyVids
 
-## 2. ManyVids Video Infrastructure Overview
+1. Install ManyVids Downloader from the latest GitHub release.
+2. Sign in to ManyVids if the page requires account access.
+3. Open the supported video page you want to save.
+4. Let the player load fully and press play.
+5. Click the extension button or the on-page download control.
+6. Review the detected quality options.
+7. Start the download and wait for the MP4 export to complete.
+8. Open the saved file from your Downloads folder.
 
-### 2.1 Video Hosting Types
+## Supported Formats
 
-- MP4 progressive downloads
-- HLS playlists for adaptive playback
+- Input: Supported ManyVids video sources
+- Output: MP4
 
-### 2.2 CDN Architecture
+Saved files use MP4 so they are easier to replay on standard media players, move between devices, and keep in a local archive.
 
-- cdn*.manyvids.com (video delivery)
-- ods.manyvids.com (static assets)
+## Who It's For
 
-### 2.3 Video Processing Pipeline
+- ManyVids users saving videos they already have access to
+- Creators archiving their own published content
+- Users who want offline viewing without repeated streaming
+- Anyone who wants a browser-based workflow instead of external tools
+- Non-technical users who want a simpler way to save video pages
 
-1. User loads product or video page
-2. Client requests BFF store API for metadata
-3. Response includes media URLs and tokens
-4. Client fetches MP4/HLS from CDN
+## Common Use Cases
 
-### 2.4 Access Control and Authentication
+- Save a supported ManyVids video for offline playback
+- Download a video in the best available quality
+- Keep a local copy of content you have purchased or own
+- Archive creator content for your own records
+- Use a direct browser workflow instead of a manual workaround
 
-- Requires authenticated session cookies
-- Media URLs are signed and short-lived
+## Troubleshooting
 
----
+**The extension is not detecting the video**  
+Press play first and wait a few seconds so the video source has time to initialize.
 
-## 3. URL Patterns and Detection
+**No quality options are listed**  
+Some pages expose only one playable variant.
 
-### 3.1 Watch Page URL Patterns
+**The download did not start**  
+Refresh the page, replay the video, and try again once the player is fully loaded.
 
-```
-https://www.manyvids.com/Video/<id>/<slug>/
-```
+**The page requires login or purchase access**  
+The extension only works on videos you can already access in your active ManyVids session.
 
-### 3.2 Embed URL Patterns
+**The page structure looks unusual**  
+Some videos may use a different delivery setup than the usual player flow, which can affect detection.
 
-```
-https://www.manyvids.com/embed/<id>
-```
+## Trial & Access
 
-### 3.3 Direct Media and CDN URL Patterns
+- Includes **3 free downloads** so you can test the workflow first
+- Email sign-in uses secure one-time password verification
+- No credit card required for the trial
+- Unlimited downloads are available with a paid license
 
-```
-https://cdn*.manyvids.com/videos/<id>/<file>.mp4
-https://cdn*.manyvids.com/videos/<id>/master.m3u8
-```
+Start here: [https://serp.ly/manyvids-downloader](https://serp.ly/manyvids-downloader)
 
-### 3.4 Regex Patterns for URL Extraction
+## Installation Instructions
 
-```regex
-manyvids\\.com/Video/(\\d+)/
-\"file\"\\s*:\\s*\"https?://[^\"]+\"
-```
+1. Open the latest release page:
+   [https://github.com/serpapps/manyvids-downloader/releases/latest](https://github.com/serpapps/manyvids-downloader/releases/latest)
+2. Download the extension build for your browser.
+3. Install the extension.
+4. Open a supported ManyVids video page.
+5. Use the extension controls to detect and download the video.
 
-### 3.5 Command-line URL Extraction
+## FAQ
 
-```bash
-grep -oE "https?://[^'\" ]+\.(mp4|m3u8)" page.html | sort -u
-grep -nE "bff|video|file" page.html
-```
+**Can I download ManyVids videos as MP4?**  
+Yes. Supported video pages can be exported as MP4 files.
 
----
+**Do I need to press play first?**  
+Yes. Many video sources are only exposed after playback begins.
 
-## 4. Stream Formats and CDN Analysis
+**What file format do downloads use?**  
+Videos are saved as MP4 files.
 
-### 4.1 Stream Formats
+**Do I need extra software?**  
+No. Everything runs through the browser extension.
 
-| Format | Extension | Notes |
-|--------|-----------|-------|
-| MP4 (progressive) | .mp4 | Primary download format |
-| HLS (adaptive) | .m3u8 | Stream manifests for adaptive playback |
+**Can creators use it to archive their own content?**  
+Yes, as long as the content is accessible in the active browser session.
 
-### 4.2 Typical Quality Ladder
+## Notes
 
-| Quality | Typical Resolution | Notes |
-|---------|--------------------|-------|
-| Low | 360p - 480p | Fast preview streams or mobile variants |
-| Medium | 720p | Common default for web playback |
-| High | 1080p+ | Available when source uploads are higher quality |
+- Only download content you own or have explicit permission to save
+- The extension only works on media you can already play in your browser session
+- Video quality depends on the source stream exposed on that page
+- An internet connection is required for the initial download
 
-### 4.3 CDN URL Construction and Query Parameters
+## About ManyVids
 
-- Media URLs are signed; download shortly after retrieval
-- Use cookies or headers to access private content
-
-### 4.4 Validation and Inspection Commands
-
-```bash
-ffprobe -hide_banner -show_streams "video.mp4"
-```
-
----
-
-## 5. yt-dlp Implementation Strategies
-
-yt-dlp works best with direct MP4/HLS URLs. Use cookies from a logged-in session to access paid content.
-
-### 5.1 Basic Usage
-
-```bash
-yt-dlp [OPTIONS] [--] URL [URL...]
-yt-dlp -F "https://example.com/watch/123"
-```
-
-### 5.2 Authentication and Cookies
-
-- Use --cookies-from-browser for authenticated sessions
-- Pass referer headers if CDN is strict
-
-### 5.3 Format Selection and Output Templates
-
-```bash
-yt-dlp -f bestvideo+bestaudio/best "URL"
-yt-dlp -o "%(title)s.%(ext)s" "URL"
-yt-dlp --download-archive archive.txt "URL"
-```
-
-### 5.4 Site-Specific Examples
-
-```bash
-yt-dlp --cookies-from-browser chrome "https://www.manyvids.com/Video/<id>/<slug>/"
-yt-dlp "https://cdn*.manyvids.com/videos/<id>/<file>.mp4"
-```
-
-### 5.5 Batch and Archive Mode
-
-```bash
-yt-dlp -a urls.txt --download-archive archive.txt
-yt-dlp --no-overwrites --continue "URL"
-```
-
-### 5.6 Error Handling Patterns
-
-- Expired tokens cause 403; re-fetch metadata
-
----
-
-## 6. FFmpeg Processing Techniques
-
-Use ffmpeg to remux HLS playlists when MP4 is not available.
-
-### 6.1 Inspect and Validate Streams
-
-```bash
-ffmpeg -i "https://cdn*.manyvids.com/videos/<id>/master.m3u8" -c copy output.mp4
-```
-
-### 6.2 Common Remux and Repair Patterns
-
-```bash
-ffmpeg -i "playlist.m3u8" -c copy output.mp4
-ffmpeg -i input.mp4 -c copy -movflags +faststart output.mp4
-ffprobe -hide_banner -show_streams output.mp4
-```
-
----
-
-## 7. Alternative Tools and Backup Methods
-
-### 7.1 Streamlink
-
-```bash
-streamlink "https://www.manyvids.com/Video/<id>/<slug>/" best -o output.mp4
-```
-
-### 7.2 aria2c
-
-```bash
-aria2c -o video.mp4 "https://cdn*.manyvids.com/videos/<id>/<file>.mp4"
-```
-
-### 7.3 gallery-dl
-
-```bash
-gallery-dl "https://www.manyvids.com/Video/<id>/<slug>/"
-```
-
-### 7.4 Browser DevTools
-
-- Filter Network for bff/store/video requests
-- Inspect JSON for file, hls, or playlist URLs
-
----
-
-## 8. ManyVids API Integration
-
-### 8.1 Known Endpoints
-
-- GET https://www.manyvids.com/bff/store/video/<id>
-
-### 8.2 Example Requests
-
-```bash
-curl -H 'Cookie: <session>' https://www.manyvids.com/bff/store/video/<id>
-```
-
-### 8.3 Token and Session Handling
-
-- Use authenticated cookies to access private data
-
----
-
-## 9. Implementation Recommendations
-
-### 9.1 Detection Hierarchy
-
-- Query store API for media URLs
-- Fallback to HTML or network capture
-
-### 9.2 Site-Specific Notes
-
-- Require user login for paid content
-- Cache metadata briefly to avoid token expiry
-
-### 9.3 Storage and Naming Strategy
-
-- Include creator name and video ID in filename
-
----
-
-## 10. Troubleshooting and Edge Cases
-
-- Signed URLs expire quickly
-- Content may be region-restricted
-
----
-
-## 11. Conclusion
-
-ManyVids relies on authenticated API calls that return signed URLs. Download flows should capture these URLs with valid cookies, then use yt-dlp or ffmpeg to retrieve the MP4/HLS assets.
-
-| Tool | Best Use Case | Notes |
-|------|---------------|-------|
-| yt-dlp | Primary downloader for MP4/HLS | Supports cookies, format selection, retries |
-| ffmpeg | Remuxing and validation | Useful for HLS to MP4 conversion |
-| streamlink | Live/HLS fallback | Streams to file or pipes into ffmpeg |
-| aria2c | Multi-connection HTTP/HLS downloads | Good for large files and retries |
-| gallery-dl | Image-first or gallery-heavy sites | Best for gallery or attachment extraction |
-
-
----
-
-## Disclaimer and Ethical Use
-
-This document is provided for lawful, personal, or authorized use cases only. Always respect the site terms of service, content creator rights, and applicable laws. If DRM or explicit access controls are present, do not attempt to bypass them; use official downloads or creator-provided access instead.
-
-## Last Updated
-
-December 2025
-
-## Next Review
-
-90 days from last update or when site playback changes are observed.
-
-## Related
-
-- SERP Apps research index (internal)
-- SERP extension downloaders (internal)
-
-</details>
+ManyVids is a creator platform built around hosted video content and member-access pages. Because playback is designed for streaming inside the site, there is no simple universal built-in download flow for viewers. ManyVids Downloader simplifies that process for users who need a local MP4 copy of accessible content.
